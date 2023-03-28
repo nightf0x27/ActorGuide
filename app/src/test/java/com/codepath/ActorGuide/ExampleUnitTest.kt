@@ -1,4 +1,4 @@
-package com.codepath.articlesearch
+package com.codepath.ActorGuide
 
 import org.junit.Test
 
