@@ -1,5 +1,6 @@
 package com.codepath.ActorGuide
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,7 @@ fun createJson() = Json {
 private const val TAG = "MainActivity/"
 private const val SEARCH_API_KEY =  BuildConfig.API_KEY
 private const val ACTOR_SEARCH_URL =
-    "https://api.themoviedb.org/3/person/popular?api_key=${SEARCH_API_KEY}"
+    "https://api.themoviedb.org/3/tv/popular?api_key=${SEARCH_API_KEY}"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var actorsRecyclerView: RecyclerView
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        actorsRecyclerView = findViewById(R.id.articles)
+        actorsRecyclerView = findViewById(R.id.actors)
         // TODO: Set up ArticleAdapter with articles
         actorsRecyclerView.adapter = actorAdapter
         actorsRecyclerView.layoutManager = LinearLayoutManager(this).also {
@@ -56,14 +57,16 @@ class MainActivity : AppCompatActivity() {
                 Log.e(TAG, "Failed to fetch articles: $statusCode")
             }
 
+            @SuppressLint("SuspiciousIndentation")
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.i(TAG, "Successfully fetched articles: $json")
                 try {
                     // TODO: Create the parsedJSON
                     val parsedJson = createJson().decodeFromString(
                         SearchActor.serializer(),
-                        json.jsonObject.toString()
-                    )
+                        json.jsonObject.toString())
+                                Log.i(TAG, "Parsed JSON $parsedJson")
+
                     // TODO: Do something with the returned json (contains article information)
                     parsedJson.results?.let { list ->
                         actors.addAll(list)

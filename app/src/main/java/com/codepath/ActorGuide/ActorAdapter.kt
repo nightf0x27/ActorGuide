@@ -35,7 +35,7 @@ class ActorAdapter(private val context: Context, private val actors: List<Actor>
 
         private val mediaImageView = itemView.findViewById<ImageView>(R.id.mediaImage)
         private val titleTextView = itemView.findViewById<TextView>(R.id.mediaTitle)
-        private val abstractTextView = itemView.findViewById<TextView>(R.id.mediaAbstract)
+        //private val abstractTextView = itemView.findViewById<TextView>(R.id.mediaAbstract)
 
         init {
             itemView.setOnClickListener(this)
@@ -43,11 +43,14 @@ class ActorAdapter(private val context: Context, private val actors: List<Actor>
 
         // TODO: Write a helper method to help set up the onBindViewHolder method
         fun bind(actor: Actor) {
-            titleTextView.text = actor.known.toString()
-            abstractTextView.text = actor.mediaImageUrl
+           // val picture ="https://image.tmdb.org/t/p/w500"
+            //val actor = actors[position]
+            titleTextView.text = actor.name
+          // abstractTextView.text = actor.overview
+            //mediaImageView.ImageView = actor.mediaImageUrl
 
             Glide.with(context)
-                .load(actor.mediaImageUrl)
+                .load(  actor.mediaImageUrl)
                 .into(mediaImageView)
         }
         override fun onClick(v: View?) {
