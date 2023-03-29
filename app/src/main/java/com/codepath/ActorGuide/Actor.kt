@@ -13,31 +13,29 @@ data class SearchActor(
 @Keep
 @Serializable
 data class Actor(
-    @SerialName("profile_path")
+    @SerialName("poster_path")
     val image: String?,
-    @SerialName("adult")
-    val adult: Boolean?,
-    @SerialName("known_for")
-    val known: List<OneOf>?,
+    @SerialName("name")
+    val name: String?,
+    @SerialName("overview")
+    val overview: String?,
+    @SerialName("vote_count")
+    val voteCount: Int?,
+    @SerialName("first_air_date")
+    val firstAir: String?,
 
 ) : java.io.Serializable {
-    val mediaImageUrl = "https://api.themoviedb.org/3/person/popular${known?.firstOrNull { it.title != null }?.title ?: ""}"
+    val mediaImageUrl = "https://image.tmdb.org/t/p/w500${image}"
 }
-
-@Keep
-@kotlinx.serialization.Serializable
-data class OneOf(
-    @SerialName("title")
-    val title: String?,
-    @SerialName("release_date")
-    val releaseDate: String?,
-    @SerialName("overview")
-    val overview: String?
-)
-
-@androidx.annotation.Keep
-@Serializable
-data class Known(
-    @SerialName("url")
-    val url: String?
-) : java.io.Serializable
+//@Keep
+//@Serializable
+//data class OneOf(
+  //  @SerialName("overview")
+    //val title: String?)
+    //@SerialName("release_date")
+    //val releaseDate: String?,
+  //  @SerialName("overview")
+  //  val overview: String?
+  // @SerialName("media_type")
+  //  val mediatype: String
+//) : java.io.Serializable
